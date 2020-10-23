@@ -33,7 +33,21 @@
                     </Canvas>
                 </Grid>
             </TabItem>
-            <TabItem Header=" Товары 2 ">
+            
+            <TabItem Header=" Товары и тип ">
+                <DataGrid x:Name="GridTovarType" BorderBrush="Blue" BorderThickness="1" MinWidth="30"
+                          RowBackground="LightGray" AlternatingRowBackground="White" IsReadOnly="True"
+                          HorizontalGridLinesBrush="DarkGray" VerticalGridLinesBrush="CadetBlue"
+                          AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=IdTovar}" Header="№" Width="40" />
+                        <DataGridTextColumn Binding="{Binding Path=NameTorar}" Header="Наименование" Width="100" />
+                        <DataGridTextColumn Binding="{Binding Path=NameType}" Header="Тип" Width="80" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            
+            <!--<TabItem Header=" Товары 2 " IsSelected="True">
                 <DataGrid x:Name="GridViewTovar" BorderBrush="Blue" BorderThickness="1" MinWidth="30"
                           RowBackground="LightGray" AlternatingRowBackground="White" IsReadOnly="True"
                           HorizontalGridLinesBrush="DarkGray" VerticalGridLinesBrush="CadetBlue"
@@ -45,7 +59,7 @@
                         <DataGridTextColumn Binding="{Binding Path=NameType}" Header="Тип" Width="80" />
                     </DataGrid.Columns>
                 </DataGrid>
-            </TabItem>
+            </TabItem>-->
 
         </TabControl>
 

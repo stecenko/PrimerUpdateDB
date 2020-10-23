@@ -20,6 +20,11 @@ namespace PrimerUpdate.Model
         }
 
 
+        public IEnumerable<ViewTovarType> GetViewTovarTypes()
+        {
+            return primerEntities.ViewTovarTypes.ToList();
+        }
+
         public IEnumerable<Tovar> GetTovars()
         {
             return primerEntities.Tovars.ToList();
@@ -30,12 +35,11 @@ namespace PrimerUpdate.Model
         public void InsertTovar(string nameTovar)
         {
             // вставляем товар
-            var tovar = primerEntities.Tovars.Add(new Tovar() { NameTorar = nameTovar, TypeTovar = 1 });
+            var tovar = primerEntities.Tovars.Add(new Tovar() { NameTorar = nameTovar, TypeTovar = 2 }); //для удобства TypeTovar - будет "продукты"
             primerEntities.SaveChanges();
 
-            int id = tovar.IdTovar; // получаем ID только после сохранения данных SaveChanges
-
-            var price = primerEntities.Prices.Add(new Price() { idTovar = id, PriceTovar = 100 });
+            //int id = tovar.IdTovar; // получаем ID только после сохранения данных SaveChanges
+            //var price = primerEntities.Prices.Add(new Price() { idTovar = id, PriceTovar = 100 });
             primerEntities.SaveChanges();
         }
 

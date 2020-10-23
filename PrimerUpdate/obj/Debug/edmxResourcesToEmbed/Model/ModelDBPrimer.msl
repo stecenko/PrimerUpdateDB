@@ -37,5 +37,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="KolichestvoTovarov" FunctionName="Хранилище PrimerModel.KolichestvoTovarov" />
+    <EntitySetMapping Name="ViewTovarTypes">
+      <EntityTypeMapping TypeName="PrimerModel.ViewTovarType">
+        <MappingFragment StoreEntitySet="ViewTovarType">
+          <ScalarProperty Name="NameType" ColumnName="NameType" />
+          <ScalarProperty Name="NameTorar" ColumnName="NameTorar" />
+          <ScalarProperty Name="IdTovar" ColumnName="IdTovar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

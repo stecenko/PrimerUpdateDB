@@ -31,6 +31,7 @@ namespace PrimerUpdate.Model
         public virtual DbSet<TypeTovar> TypeTovars { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<ViewTovar> ViewTovars { get; set; }
+        public virtual DbSet<ViewTovarType> ViewTovarTypes { get; set; }
     
         public virtual int KolichestvoTovarov(Nullable<decimal> price, ObjectParameter kolvo)
         {

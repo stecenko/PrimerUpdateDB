@@ -35,6 +35,16 @@
     <Property Name="PriceTovar" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NameType" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Primer.dbo.ViewTovarType" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ViewTovarType">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="int" Nullable="false" />
+    <Property Name="NameTorar" Type="nvarchar" MaxLength="50" />
+    <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <Association Name="FK_Price_Tovar">
     <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
     <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
@@ -79,6 +89,13 @@
     [ViewTovars].[PriceTovar] AS [PriceTovar], 
     [ViewTovars].[NameType] AS [NameType]
     FROM [dbo].[ViewTovars] AS [ViewTovars]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewTovarType" EntityType="Self.ViewTovarType" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewTovarType].[IdTovar] AS [IdTovar], 
+    [ViewTovarType].[NameTorar] AS [NameTorar], 
+    [ViewTovarType].[NameType] AS [NameType]
+    FROM [dbo].[ViewTovarType] AS [ViewTovarType]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Price_Tovar" Association="Self.FK_Price_Tovar">
       <End Role="Tovar" EntitySet="Tovar" />

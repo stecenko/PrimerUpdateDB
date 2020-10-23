@@ -76,5 +76,14 @@
       <Parameter Name="Price" Mode="In" Type="Decimal" />
       <Parameter Name="Kolvo" Mode="InOut" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="ViewTovarTypes" EntityType="PrimerModel.ViewTovarType" />
   </EntityContainer>
+  <EntityType Name="ViewTovarType">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="Int32" Nullable="false" />
+    <Property Name="NameTorar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

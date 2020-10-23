@@ -4,9 +4,6 @@ using System.Windows;
 
 namespace PrimerUpdate
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         PrimerRepository primerRepository;
@@ -17,7 +14,8 @@ namespace PrimerUpdate
             primerRepository = new PrimerRepository();
 
             GridTovar.ItemsSource = primerRepository.GetTovars();
-            GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
+            GridTovarType.ItemsSource = primerRepository.GetViewTovarTypes();
+            //GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
         }
 
 
@@ -27,8 +25,10 @@ namespace PrimerUpdate
             GridTovar.ItemsSource = null;
             GridTovar.ItemsSource = primerRepository.GetTovars();
 
-            GridViewTovar.ItemsSource = null;
-            GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
+            GridTovarType.ItemsSource = null;
+            GridTovarType.ItemsSource = primerRepository.GetViewTovarTypes();
+            //GridViewTovar.ItemsSource = null;
+            //GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
         }
 
         private void UpdateTovar_Click(object sender, RoutedEventArgs e)
@@ -40,9 +40,12 @@ namespace PrimerUpdate
             GridTovar.ItemsSource = null;
             GridTovar.ItemsSource = primerRepository.GetTovars();
 
-            GridViewTovar.ItemsSource = null;
-            GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
-            
+            GridTovarType.ItemsSource = null;
+            GridTovarType.ItemsSource = primerRepository.GetViewTovarTypes();
+
+            //GridViewTovar.ItemsSource = null;
+            //GridViewTovar.ItemsSource = primerRepository.GetViewTovars();
+
         }
     }
 }
