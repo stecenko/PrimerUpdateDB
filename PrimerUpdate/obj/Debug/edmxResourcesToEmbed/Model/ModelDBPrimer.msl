@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище PrimerModelContainer" CdmEntityContainer="PrimerEntities">
+    <EntitySetMapping Name="Tovars">
+      <EntityTypeMapping TypeName="PrimerModel.Tovar">
+        <MappingFragment StoreEntitySet="Tovar">
+          <ScalarProperty Name="IdTovar" ColumnName="IdTovar" />
+          <ScalarProperty Name="NameTorar" ColumnName="NameTorar" />
+          <ScalarProperty Name="TypeTovar" ColumnName="TypeTovar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeTovars">
+      <EntityTypeMapping TypeName="PrimerModel.TypeTovar">
+        <MappingFragment StoreEntitySet="TypeTovar">
+          <ScalarProperty Name="IdType" ColumnName="IdType" />
+          <ScalarProperty Name="NameType" ColumnName="NameType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prices">
+      <EntityTypeMapping TypeName="PrimerModel.Price">
+        <MappingFragment StoreEntitySet="Price">
+          <ScalarProperty Name="idTovar" ColumnName="idTovar" />
+          <ScalarProperty Name="PriceTovar" ColumnName="PriceTovar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewTovars">
+      <EntityTypeMapping TypeName="PrimerModel.ViewTovar">
+        <MappingFragment StoreEntitySet="ViewTovars">
+          <ScalarProperty Name="IdTovar" ColumnName="IdTovar" />
+          <ScalarProperty Name="NameTorar" ColumnName="NameTorar" />
+          <ScalarProperty Name="PriceTovar" ColumnName="PriceTovar" />
+          <ScalarProperty Name="NameType" ColumnName="NameType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="KolichestvoTovarov" FunctionName="Хранилище PrimerModel.KolichestvoTovarov" />
+  </EntityContainerMapping>
+</Mapping>

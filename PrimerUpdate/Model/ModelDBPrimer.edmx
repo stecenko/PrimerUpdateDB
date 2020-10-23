@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище PrimerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Primer.dbo.Price" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="idTovar" />
+          </Key>
+          <Property Name="idTovar" Type="int" Nullable="false" />
+          <Property Name="PriceTovar" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="IdTovar" />
+          </Key>
+          <Property Name="IdTovar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameTorar" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeTovar" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeTovar">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Primer.dbo.ViewTovars" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ViewTovars">
+          <Key>
+            <PropertyRef Name="IdTovar" />
+          </Key>
+          <Property Name="IdTovar" Type="int" Nullable="false" />
+          <Property Name="NameTorar" Type="nvarchar" MaxLength="50" />
+          <Property Name="PriceTovar" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Price_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="IdTovar" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="idTovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_TypeTovar">
+          <End Role="TypeTovar" Type="Self.TypeTovar" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTovar">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="TypeTovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="KolichestvoTovarov" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Price" Type="decimal" Mode="In" />
+          <Parameter Name="Kolvo" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="Хранилище PrimerModelContainer">
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeTovar" EntityType="Self.TypeTovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price" EntityType="Self.Price" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Price].[idTovar] AS [idTovar], 
+    [Price].[PriceTovar] AS [PriceTovar]
+    FROM [dbo].[Price] AS [Price]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewTovars" EntityType="Self.ViewTovars" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewTovars].[IdTovar] AS [IdTovar], 
+    [ViewTovars].[NameTorar] AS [NameTorar], 
+    [ViewTovars].[PriceTovar] AS [PriceTovar], 
+    [ViewTovars].[NameType] AS [NameType]
+    FROM [dbo].[ViewTovars] AS [ViewTovars]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Price_Tovar" Association="Self.FK_Price_Tovar">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="Price" EntitySet="Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_TypeTovar" Association="Self.FK_Tovar_TypeTovar">
+            <End Role="TypeTovar" EntitySet="TypeTovar" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PrimerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="IdTovar" />
+          </Key>
+          <Property Name="IdTovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameTorar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeTovar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Price" Relationship="Self.FK_Price_Tovar" FromRole="Tovar" ToRole="Price" />
+          <NavigationProperty Name="TypeTovar1" Relationship="Self.FK_Tovar_TypeTovar" FromRole="Tovar" ToRole="TypeTovar" />
+        </EntityType>
+        <EntityType Name="TypeTovar">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Tovar_TypeTovar" FromRole="TypeTovar" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="idTovar" />
+          </Key>
+          <Property Name="idTovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PriceTovar" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Price_Tovar" FromRole="Price" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="ViewTovar">
+          <Key>
+            <PropertyRef Name="IdTovar" />
+          </Key>
+          <Property Name="IdTovar" Type="Int32" Nullable="false" />
+          <Property Name="NameTorar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PriceTovar" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Price_Tovar">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="IdTovar" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="idTovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_TypeTovar">
+          <End Role="TypeTovar" Type="Self.TypeTovar" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTovar">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="TypeTovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrimerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tovars" EntityType="Self.Tovar" />
+          <EntitySet Name="TypeTovars" EntityType="Self.TypeTovar" />
+          <EntitySet Name="Prices" EntityType="Self.Price" />
+          <EntitySet Name="ViewTovars" EntityType="Self.ViewTovar" />
+          <AssociationSet Name="FK_Price_Tovar" Association="Self.FK_Price_Tovar">
+            <End Role="Tovar" EntitySet="Tovars" />
+            <End Role="Price" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_TypeTovar" Association="Self.FK_Tovar_TypeTovar">
+            <End Role="TypeTovar" EntitySet="TypeTovars" />
+            <End Role="Tovar" EntitySet="Tovars" />
+          </AssociationSet>
+          <FunctionImport Name="KolichestvoTovarov">
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="Kolvo" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PrimerModelContainer" CdmEntityContainer="PrimerEntities">
+          <EntitySetMapping Name="Tovars">
+            <EntityTypeMapping TypeName="PrimerModel.Tovar">
+              <MappingFragment StoreEntitySet="Tovar">
+                <ScalarProperty Name="IdTovar" ColumnName="IdTovar" />
+                <ScalarProperty Name="NameTorar" ColumnName="NameTorar" />
+                <ScalarProperty Name="TypeTovar" ColumnName="TypeTovar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeTovars">
+            <EntityTypeMapping TypeName="PrimerModel.TypeTovar">
+              <MappingFragment StoreEntitySet="TypeTovar">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="PrimerModel.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="idTovar" ColumnName="idTovar" />
+                <ScalarProperty Name="PriceTovar" ColumnName="PriceTovar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewTovars">
+            <EntityTypeMapping TypeName="PrimerModel.ViewTovar">
+              <MappingFragment StoreEntitySet="ViewTovars">
+                <ScalarProperty Name="IdTovar" ColumnName="IdTovar" />
+                <ScalarProperty Name="NameTorar" ColumnName="NameTorar" />
+                <ScalarProperty Name="PriceTovar" ColumnName="PriceTovar" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="KolichestvoTovarov" FunctionName="Хранилище PrimerModel.KolichestvoTovarov" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

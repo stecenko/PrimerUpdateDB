@@ -1,0 +1,53 @@
+﻿<Window x:Class="PrimerUpdate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrimerUpdate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="700">
+    <Grid>
+        <TabControl >
+            <TabItem Header=" Товары 1 ">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="GridTovar" BorderBrush="Blue" BorderThickness="1" MinWidth="30"
+                          RowBackground="LightGray" AlternatingRowBackground="White" IsReadOnly="True"
+                          HorizontalGridLinesBrush="DarkGray" VerticalGridLinesBrush="CadetBlue"
+                          AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=IdTovar}" Header="№" Width="40" />
+                            <DataGridTextColumn Binding="{Binding Path=NameTorar}" Header="Наименование" Width="100" />
+                            <DataGridTextColumn Binding="{Binding Path=TypeTovar}" Header="Тип" Width="80" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Canvas Grid.Column="1">
+                        <Label Content="Наименование"/>
+                        <TextBox x:Name="tbName" Width="150" Canvas.Left="150" Canvas.Top="5"/>
+                        <Button Content="Добавить" Canvas.Left="50" Canvas.Top="30" Click="AddTovar_Click"/>
+                        
+                        <Button Content="Обновить" Canvas.Left="50" Canvas.Top="60" Click="UpdateTovar_Click"/>
+                    </Canvas>
+                </Grid>
+            </TabItem>
+            <TabItem Header=" Товары 2 ">
+                <DataGrid x:Name="GridViewTovar" BorderBrush="Blue" BorderThickness="1" MinWidth="30"
+                          RowBackground="LightGray" AlternatingRowBackground="White" IsReadOnly="True"
+                          HorizontalGridLinesBrush="DarkGray" VerticalGridLinesBrush="CadetBlue"
+                          AutoGenerateColumns="False" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=IdTovar}" Header="№" Width="40" />
+                        <DataGridTextColumn Binding="{Binding Path=NameTorar}" Header="Наименование" Width="100" />
+                        <DataGridTextColumn Binding="{Binding Path=PriceTovar}" Header="Цена" Width="40" />
+                        <DataGridTextColumn Binding="{Binding Path=NameType}" Header="Тип" Width="80" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>

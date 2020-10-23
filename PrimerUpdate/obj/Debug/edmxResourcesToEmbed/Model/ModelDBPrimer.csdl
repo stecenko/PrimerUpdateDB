@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PrimerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tovar">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTorar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TypeTovar" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Price" Relationship="Self.FK_Price_Tovar" FromRole="Tovar" ToRole="Price" />
+    <NavigationProperty Name="TypeTovar1" Relationship="Self.FK_Tovar_TypeTovar" FromRole="Tovar" ToRole="TypeTovar" />
+  </EntityType>
+  <EntityType Name="TypeTovar">
+    <Key>
+      <PropertyRef Name="IdType" />
+    </Key>
+    <Property Name="IdType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tovars" Relationship="Self.FK_Tovar_TypeTovar" FromRole="TypeTovar" ToRole="Tovar" />
+  </EntityType>
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="idTovar" />
+    </Key>
+    <Property Name="idTovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PriceTovar" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Tovar" Relationship="Self.FK_Price_Tovar" FromRole="Price" ToRole="Tovar" />
+  </EntityType>
+  <EntityType Name="ViewTovar">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="Int32" Nullable="false" />
+    <Property Name="NameTorar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PriceTovar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Price_Tovar">
+    <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tovar">
+        <PropertyRef Name="IdTovar" />
+      </Principal>
+      <Dependent Role="Price">
+        <PropertyRef Name="idTovar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tovar_TypeTovar">
+    <End Role="TypeTovar" Type="Self.TypeTovar" Multiplicity="1" />
+    <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeTovar">
+        <PropertyRef Name="IdType" />
+      </Principal>
+      <Dependent Role="Tovar">
+        <PropertyRef Name="TypeTovar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PrimerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tovars" EntityType="Self.Tovar" />
+    <EntitySet Name="TypeTovars" EntityType="Self.TypeTovar" />
+    <EntitySet Name="Prices" EntityType="Self.Price" />
+    <EntitySet Name="ViewTovars" EntityType="Self.ViewTovar" />
+    <AssociationSet Name="FK_Price_Tovar" Association="Self.FK_Price_Tovar">
+      <End Role="Tovar" EntitySet="Tovars" />
+      <End Role="Price" EntitySet="Prices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tovar_TypeTovar" Association="Self.FK_Tovar_TypeTovar">
+      <End Role="TypeTovar" EntitySet="TypeTovars" />
+      <End Role="Tovar" EntitySet="Tovars" />
+    </AssociationSet>
+    <FunctionImport Name="KolichestvoTovarov">
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+      <Parameter Name="Kolvo" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

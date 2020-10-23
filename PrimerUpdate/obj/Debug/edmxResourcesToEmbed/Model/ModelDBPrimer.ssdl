@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище PrimerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Primer.dbo.Price" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="idTovar" />
+    </Key>
+    <Property Name="idTovar" Type="int" Nullable="false" />
+    <Property Name="PriceTovar" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Tovar">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameTorar" Type="nvarchar" MaxLength="50" />
+    <Property Name="TypeTovar" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeTovar">
+    <Key>
+      <PropertyRef Name="IdType" />
+    </Key>
+    <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Primer.dbo.ViewTovars" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ViewTovars">
+    <Key>
+      <PropertyRef Name="IdTovar" />
+    </Key>
+    <Property Name="IdTovar" Type="int" Nullable="false" />
+    <Property Name="NameTorar" Type="nvarchar" MaxLength="50" />
+    <Property Name="PriceTovar" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Price_Tovar">
+    <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+    <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tovar">
+        <PropertyRef Name="IdTovar" />
+      </Principal>
+      <Dependent Role="Price">
+        <PropertyRef Name="idTovar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tovar_TypeTovar">
+    <End Role="TypeTovar" Type="Self.TypeTovar" Multiplicity="1" />
+    <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeTovar">
+        <PropertyRef Name="IdType" />
+      </Principal>
+      <Dependent Role="Tovar">
+        <PropertyRef Name="TypeTovar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="KolichestvoTovarov" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Price" Type="decimal" Mode="In" />
+    <Parameter Name="Kolvo" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="Хранилище PrimerModelContainer">
+    <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeTovar" EntityType="Self.TypeTovar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Price" EntityType="Self.Price" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Price].[idTovar] AS [idTovar], 
+    [Price].[PriceTovar] AS [PriceTovar]
+    FROM [dbo].[Price] AS [Price]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewTovars" EntityType="Self.ViewTovars" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewTovars].[IdTovar] AS [IdTovar], 
+    [ViewTovars].[NameTorar] AS [NameTorar], 
+    [ViewTovars].[PriceTovar] AS [PriceTovar], 
+    [ViewTovars].[NameType] AS [NameType]
+    FROM [dbo].[ViewTovars] AS [ViewTovars]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Price_Tovar" Association="Self.FK_Price_Tovar">
+      <End Role="Tovar" EntitySet="Tovar" />
+      <End Role="Price" EntitySet="Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tovar_TypeTovar" Association="Self.FK_Tovar_TypeTovar">
+      <End Role="TypeTovar" EntitySet="TypeTovar" />
+      <End Role="Tovar" EntitySet="Tovar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

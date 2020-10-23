@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8e72c223a9849f992252a7646c31d71" Name="Diagram1">
+        <EntityTypeShape EntityType="PrimerModel.Tovar" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimerModel.TypeTovar" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimerModel.Price" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimerModel.ViewTovar" Width="1.5" PointX="7.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="PrimerModel.FK_Price_Tovar" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimerModel.FK_Tovar_TypeTovar" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
